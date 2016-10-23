@@ -12,6 +12,6 @@ app.post('/filemeta', upload.any(), function (req, res, next) {
 	});
 });
 
-app.listen(3000, function(err) {
+app.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0', function(err) {
 	console.log('app is listening to port: 3000');
 });
