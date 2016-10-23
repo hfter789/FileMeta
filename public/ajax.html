@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <style>
+      .wrapper {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    </style>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file" id="upload-file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+        <a class="waves-effect waves-light btn submit-btn">Submit</a>
+      </div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  </body>
+  <script type="text/javascript">
+    $('.submit-btn').click(function submitForm() {
+      var data = new FormData();
+      $.each($('#upload-file')[0].files, function(i, file) {
+          data.append('file-'+i, file);
+      });
+      $.ajax({
+        type: "POST",
+        timeout: 50000,
+        url: '/filemeta',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            console.log('success');
+        }
+    });
+    });
+  </script>
+</html>
